@@ -1,0 +1,1 @@
+export * from './employee-details/employee-details.component';
