@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../../services/employee.service';
@@ -10,16 +10,6 @@ import { IEmployee } from '../../models/IEmployee';
   templateUrl: './employee-details.component.html',
   imports: [CommonModule, DxDataGridModule],
 })
-export class EmployeeDetailsComponent implements OnInit {
-  dataSource: IEmployee[] = [];
-
-  constructor(private empSrvc: EmployeeService) { }
-
-  ngOnInit() {
-    this.empSrvc.getEmployees().subscribe((data: IEmployee[]) => {
-      if (data && data.length > 0) {
-        this.dataSource = data;
-      }
-    });
-  }
+export class EmployeeDetailsComponent {
+  @Input() dataSource: IEmployee[] = []; // Input property to accept data from parent component
 }

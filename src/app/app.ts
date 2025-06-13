@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { EmployeeDetailsComponent } from './components';
+import { EmployeeService } from './services/employee.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,9 @@ import { EmployeeDetailsComponent } from './components';
 export class App {
   protected title = 'smtss-web';
   selectedFile: File | null = null;
+  employeeList: any[] = [];
+
+  constructor(private employeeService: EmployeeService) {}
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -34,8 +38,16 @@ export class App {
 
   onUpload() {
     if (this.selectedFile) {
-      // TODO: Implement upload logic
-      alert('File ready for upload: ' + this.selectedFile.name);
+      this.employeeService.uploadEmployeeFile(this.selectedFile).subscribe({
+        next: (response) => {
+          // alert('File uploaded successfully!');
+          console.log('File uploaded successfully!', response);
+          this.employeeList = response; // Assuming the response contains the list of employees
+        },
+        error: (err) => {
+          alert('File upload failed.');
+        }
+      });
     } else {
       alert('Please select an Excel file to upload.');
     }

@@ -3,14 +3,17 @@
     <h1>Employee Master-Detail Dashboard</h1>
   </header>
   <section class="upload-section">
-    <form class="upload-form" (ngSubmit)="onUpload()">
+    <form class="upload-form" enctype="multipart/form-data">
       <label for="excelFile" class="upload-label">Upload Excel File:</label>
-      <input type="file" id="excelFile" name="excelFile" accept=".xls,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" (change)="onFileSelected($event)" required />
-      <button type="submit" class="upload-btn">Upload</button>
+      <input type="file" id="excelFile" name="excelFile"
+        accept=".xls,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+        (change)="onFileSelected($event)" required />
+      <button type="button" class="upload-btn"
+       (click)="onUpload()">Upload</button>
     </form>
   </section>
   <main class="main-content">
-    <app-employee-details></app-employee-details>
+    <app-employee-details [dataSource]="employeeList"></app-employee-details>
   </main>
 </div>
 <router-outlet></router-outlet>

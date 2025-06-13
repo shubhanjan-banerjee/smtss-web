@@ -14,4 +14,10 @@ export class EmployeeService {
   getEmployees(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
   }
+
+  uploadEmployeeFile(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<any>(environment.API_HOST + 'employees/upload/', formData);
+  }
 }
