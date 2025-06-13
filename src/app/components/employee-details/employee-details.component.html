@@ -1,0 +1,32 @@
+<dx-data-grid 
+  [dataSource]="dataSource" 
+  width="100%"
+  [showBorders]="true" 
+  [columnAutoWidth]="true" 
+  [allowColumnResizing]="true"
+  [allowColumnReordering]="true" 
+  [rowAlternationEnabled]="true">
+  <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"
+    [showNavigationButtons]="true" [infoText]="'Page {0} of {1}'">
+  </dxo-pager>
+  <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
+  <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+  <dxi-column dataField="associateId" caption="Associate Id" [width]="100"></dxi-column>
+  <dxi-column dataField="associateName" caption="Associate Name" [width]="200"></dxi-column>
+  <dxi-column dataField="projectRole" caption="Project Role" [width]="150"></dxi-column>
+  <dxi-column dataField="skillRequirement" caption="Skill Requirement" [width]="250"></dxi-column>
+  <div *dxTemplate="let employee of 'detail'">
+    <dx-data-grid 
+      [dataSource]="employee.data.proficiency" 
+      [showBorders]="true" 
+      [columnAutoWidth]="true">
+      <dxi-column dataField="technology" caption="Technology"></dxi-column>
+      <dxi-column dataField="proficiencyLevel" caption="Proficiency Level"></dxi-column>
+    </dx-data-grid>
+  </div>
+</dx-data-grid>
